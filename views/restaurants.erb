@@ -1,0 +1,35 @@
+
+<div class="container">
+    <img class="img-fluid" src="/images/rest.jpg" width="100%">
+</div>
+
+
+<div class="container">
+    <div class="jumbotron jumbotron-fluid" id="jumbo">
+        <div class="container">
+        <div class="strike">
+          <span><h2 align="center">SousChef is your place to stay updated about the top 10 restaurants in Tel Aviv, leave a review and learn about your friends experience</h2></span>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+  <div class="row md-4">
+    <% for restaurant in @restaurants %>
+        <div class="col-md-4 text-center">
+            <div class="card" >
+                <img src="/images/<%=restaurant[:name]%>.jpg" class="card-img-top" alt="..." style="width: 100%;">
+                <div class="card-body">
+                <h5 class="card-title"><p><a href="/restaurants/<%= restaurant[:id] %>"><%= restaurant[:name] %></a></p></h5>
+                <p class="card-text">Description</p>
+                <a href="#bottom" class="btn btn-outline-dark">Leave a review</a>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+</div>
+
+

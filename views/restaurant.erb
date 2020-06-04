@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-sm-9">
+        <h2>
+            <i class="far fa-calendar-alt"></i>
+            <%= @restaurant[:name] %>
+        </h2>
+        <h1><%= @restaurant[:description] %></h1>
+        <p><%= @restaurant[:location] %></p>
+        <% for review in @reviews %>
+            <% user = @users_table.where(:id => review[:user_id]).to_a[0] %>
+            <div class="media">
+                <div class="media-body">
+                    <h5 class="mt-0"><%= user[:name] %></h5>
+                    <%= review[:comments] %>
+                </div>
+            </div>
+        <% end %>
+        <p class="mt-5">
+            <a href="/restaurants/<%= @restaurant[:id] %>/reviews/new" class="btn btn-primary">Leave a Review now!</a>
+        </p>
+    </div>
+    <div class="col-sm-3">
+        <h3>Maybe a map</h3>
+        <h3>Where?</h3>
+        <p><%= @restaurant[:phone] %></p>
+        <h3>Call Now</h3>
+
+    </div>
+</div>
