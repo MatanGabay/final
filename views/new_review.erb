@@ -1,0 +1,20 @@
+<h2>
+    <i class="far fa-calendar-alt"></i>
+    <%= %>
+</h2>
+<h1>Review for <%= @restaurant[:name] %></h1>
+
+<form action="/restaurants/<%= @restaurant[:id] %>/reviews/create" method="POST">
+  <div class="form-group">
+    <label>Are you going?</label>
+    <select class="form-control" name="going">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>How Was It?</label>
+    <textarea class="form-control" rows="3" name="comments"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
