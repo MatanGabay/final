@@ -57,8 +57,8 @@ end
 # Send SMS
 post "/restaurants/:id/reviews/SMS" do
     # @SMS = restaurant_table.where(:id => params["id"]).to_a[0]
-    account_sid = ENV["ACa6fe68400239e9493bf9cb5a7f123f8b"]
-    auth_token = ENV["52d868d66f8c2b16f3c209c459770276"]
+    account_sid = ENV["account_sid"]
+    auth_token = ENV["auth_token"]
     number = params["number"]
     time = params["time"]
     client = Twilio::REST::Client.new(account_sid, auth_token)

@@ -7,7 +7,7 @@
     <div class="jumbotron jumbotron-fluid" id="jumbo">
         <div class="container">
         <div class="strike">
-          <span><h2 align="center">SousChef is your place to stay updated about the top 10 restaurants in Tel Aviv, leave a review and learn about your friends experience</h2></span>
+          <span><h2 align="center">SousChef is your place to stay updated about the top restaurants in Tel Aviv, leave a review, learn about your friends experience and order a place in one click</h2></span>
         </div>
         </div>
     </div>
@@ -21,9 +21,8 @@
             <div class="card" >
                 <img src="/images/<%=restaurant[:name]%>.jpg" class="card-img-top" alt="..." style="width: 100%;">
                 <div class="card-body">
-                <h5 class="card-title"><p><a href="/restaurants/<%= restaurant[:id] %>"><%= restaurant[:name] %></a></p></h5>
-                <p class="card-text">Description</p>
-                <a href="#bottom" class="btn btn-outline-dark">Leave a review</a>
+                <h3 class="card-title"><p><%= restaurant[:name] %></p></h3>
+                <a href="/restaurants/<%= restaurant[:id] %>" class="btn btn-outline-dark">Learn More</a>
                 </div>
             </div>
         </div>
