@@ -17,3 +17,23 @@ h3 {
     height: 15vw;
     object-fit: cover;
 }
+
+.icon {
+    font-size: 30px;
+  }
+
+.form-group {
+    font-size: 30px;
+  }
+  
+.review {
+  font-weight: bold;
+}
+
+.headline {
+  font-weight: 300;
+  }
+
+  .col-sm-4 {
+background-color: rgb(170, 170, 170);
+}

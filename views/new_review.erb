@@ -1,20 +1,34 @@
-<h2>
-    <i class="far fa-calendar-alt"></i>
-    <%= %>
-</h2>
-<h1>Review for <%= @restaurant[:name] %></h1>
+
+<div class="container">
+<p> </p>
+<div class="headline">
+<h2 style="font-weight: 300;">How was your experience in <%= @restaurant[:name] %>?</h2>
+
+</div>
+
+<p> </p>
+
 
 <form action="/restaurants/<%= @restaurant[:id] %>/reviews/create" method="POST">
   <div class="form-group">
-    <label>Are you going?</label>
-    <select class="form-control" name="going">
-      <option value="1">Yes</option>
-      <option value="0">No</option>
+    <label for="exampleFormControlSelect1"><i class="fas fa-star" style="color:gold;font-size:40px;"></i> How many stars do they worth?</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="stars">
+      <option>1 - DO NOT GO THERE </option>
+      <option>2 - Naa..</option>
+      <option>3 - OK</option>
+      <option>4 - Great Place!</option>
+      <option>5 - OMG what was that?!</option>
     </select>
   </div>
   <div class="form-group">
-    <label>How Was It?</label>
+    <label><i class="fas fa-feather-alt" style="font-size:40px;"></i> Tell us How Was It?</label>
     <textarea class="form-control" rows="3" name="comments"></textarea>
   </div>
+<div class="form-group">
+    <label for="formGroupExampleInput"><i class="fas fa-utensils" style="font-size:40px;"></i> Dish everyone should order</label>
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="e.g. Mushroom Gnocci" name="dish">
+</div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<div>
+

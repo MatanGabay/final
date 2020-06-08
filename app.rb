@@ -19,6 +19,9 @@ restaurant_table = DB.from(:restaurants)
 reviews_table = DB.from(:reviews)
 users_table = DB.from(:users)
 
+account_sid = ENV["ACa6fe68400239e9493bf9cb5a7f123f8b"]
+auth_token = ENV["52d868d66f8c2b16f3c209c459770276"]
+
 before do
     # SELECT * FROM users WHERE id = session[:user_id]
     @current_user = users_table.where(:id => session[:user_id]).to_a[0]
@@ -44,8 +47,30 @@ get "/restaurants/:id" do
     @current_user = users_table.where(:id => session[:user_id]).to_a[0]
     puts @current_user.inspect
 
+    results = Geocoder.search(@restaurant[:location])
+    @lat_long = results.first.coordinates.join(",")
+
     view "restaurant"
 end
+
+
+# Send SMS
+post "/restaurants/:id/reviews/SMS" do
+    # @SMS = restaurant_table.where(:id => params["id"]).to_a[0]
+    account_sid = ENV["ACa6fe68400239e9493bf9cb5a7f123f8b"]
+    auth_token = ENV["52d868d66f8c2b16f3c209c459770276"]
+    number = params["number"]
+    time = params["time"]
+    client = Twilio::REST::Client.new(account_sid, auth_token)
+    client.messages.create(
+    from: "+19495654787", 
+    to: "+18472198243",
+    body: "#{number} people at #{time}"
+    )
+    view "SMS"
+end
+
+
 
 # Form to create a new Review
 get "/restaurants/:id/reviews/new" do
@@ -57,7 +82,9 @@ end
 post "/restaurants/:id/reviews/create" do
     reviews_table.insert(:restaurant_id => params["id"],
                        :user_id => @current_user[:id],
-                       :comments => params["comments"])
+                       :comments => params["comments"],
+                       :dish => params["dish"],
+                       :stars => params["stars"])
     @restaurant = reviews_table.where(:id => params["id"]).to_a[0]
     view "create_review"
 end

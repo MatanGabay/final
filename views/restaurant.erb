@@ -1,29 +1,115 @@
-<div class="row">
-    <div class="col-sm-9">
-        <h2>
-            <i class="far fa-calendar-alt"></i>
-            <%= @restaurant[:name] %>
-        </h2>
-        <h1><%= @restaurant[:description] %></h1>
-        <p><%= @restaurant[:location] %></p>
-        <% for review in @reviews %>
-            <% user = @users_table.where(:id => review[:user_id]).to_a[0] %>
-            <div class="media">
-                <div class="media-body">
-                    <h5 class="mt-0"><%= user[:name] %></h5>
-                    <%= review[:comments] %>
-                </div>
-            </div>
-        <% end %>
-        <p class="mt-5">
-            <a href="/restaurants/<%= @restaurant[:id] %>/reviews/new" class="btn btn-primary">Leave a Review now!</a>
-        </p>
-    </div>
-    <div class="col-sm-3">
-        <h3>Maybe a map</h3>
-        <h3>Where?</h3>
-        <p><%= @restaurant[:phone] %></p>
-        <h3>Call Now</h3>
+<div class="container">
+<br></br>
+    <div class="row">
+        <div class="col-sm-8">
+            <h1><i class="fas fa-utensils" style="font-size:45px;"></i> <%= @restaurant[:name] %></h1>
+            <i><h3><%= @restaurant[:description] %></h3></i>
 
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Reviewer</th>
+            <th scope="col">Comment</th>
+            <th scope="col">Best Dish</th>
+            <th scope="col">Stars</th>
+        </tr>
+    </thead>
+    <% for review in @reviews %>
+        <% user = @users_table.where(:id => review[:user_id]).to_a[0] %>
+        <tbody>
+            <tr>
+                <th scope="row"><%= user[:name] %></th>
+                <td style="width: 300px;"><%= review[:comments] %></td>
+                <td><%= review[:dish] %></td>
+                <td>
+                    <%if review[:stars]=="1 - DO NOT GO THERE "%>
+                        <i class="fas fa-star" style="color:gold;">
+                    <%end%>
+                    <%if review[:stars]=="2 - Naa.."%>
+                        <i class="fas fa-star" style="color:gold;"><i class="fas fa-star" style="color:gold;">
+                    <%end%>
+                    <%if review[:stars]=="3 - OK"%>
+                        <i class="fas fa-star" style="color:gold;"><i class="fas fa-star" style="color:gold;"><i class="fas fa-star" style="color:gold;">
+                    <%end%>
+                    <%if review[:stars]=="4 - Great Place!"%>
+                        <i class="fas fa-star" style="color:gold;"><i class="fas fa-star" style="color:gold;"><i class="fas fa-star" style="color:gold;"><i class="fas fa-star" style="color:gold;">
+                    <%end%>
+                    <%if review[:stars]=="5 - OMG what was that?!"%>
+                        <i class="fas fa-star" style="color:gold;"><i class="fas fa-star" style="color:gold;"><i class="fas fa-star" style="color:gold;"><i class="fas fa-star" style="color:gold;"><i class="fas fa-star" style="color:gold;">
+                    <%end%>
+                </td>
+            </tr>
+        </tbody>
+    <% end %>
+</table>
+
+
+
+        <p class="mt-5">
+        <%if @current_user%>
+            <a href="/restaurants/<%= @restaurant[:id] %>/reviews/new" class="btn btn-primary">Leave a Review now!</a>
+        <%else%>
+                    <a href="/logins/new" class="btn btn-primary">Leave a Review now!</a>
+        </p>
+        <%end%>
+    </div>
+
+    <div class="col-sm-4" >
+       
+        <iframe
+        width="350"
+        height="350"
+        
+        frameborder="0" 
+        style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw&q=<%= @lat_long %>&zoom=16&language=en" allowfullscreen>
+        </iframe>
+
+
+  
+        <p style="font-size:20px;"><i class="fas fa-phone-square-alt" style="font-size:35px;"></i>  <%= @restaurant[:phone] %></p>
+        <p style="font-size:20px;"><i class="fas fa-map-marker-alt" style="font-size:35px;"></i>     <%= @restaurant[:location] %></p>
+
+        <form action="/restaurants/<%= @restaurant[:id] %>/reviews/SMS" method="POST">
+        <label><h4>Quick Reservation for Today</h4></label>
+            <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1" style="font-size:20px;">Number of People</label>
+                            <select class="form-control" id="exampleFormControlSelect1" name="number">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="form-group">
+                        <label for="exampleFormControlSelect1" style="font-size:20px;">Prefered Hour</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="time">
+                            <option>6:00PM</option>
+                            <option>6:30PM</option>
+                            <option>7:00PM</option>
+                            <option>7:30PM</option>
+                            <option>8:00PM</option>
+                            <option>8:30PM</option>
+                            <option>9:00PM</option>
+                            <option>9:30PM</option>
+                            <option>10:00PM</option>
+                            <option>10:30PM</option>
+                            <option>11:00PM</option>
+                        </select>
+                        </div>
+                    </div>
+            </div>
+             <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
 </div>
