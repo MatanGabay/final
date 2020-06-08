@@ -19,8 +19,6 @@ restaurant_table = DB.from(:restaurants)
 reviews_table = DB.from(:reviews)
 users_table = DB.from(:users)
 
-account_sid = ENV["ACa6fe68400239e9493bf9cb5a7f123f8b"]
-auth_token = ENV["52d868d66f8c2b16f3c209c459770276"]
 
 before do
     # SELECT * FROM users WHERE id = session[:user_id]
