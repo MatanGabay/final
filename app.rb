@@ -82,7 +82,7 @@ post "/restaurants/:id/reviews/create" do
                        :comments => params["comments"],
                        :dish => params["dish"],
                        :stars => params["stars"])
-    @restaurant = reviews_table.where(:id => params["id"]).to_a[0]
+    @restaurant = restaurant_table.where(:id => params["id"]).to_a[0]
     view "create_review"
 end
 
