@@ -93,11 +93,24 @@ get "/users/new" do
 end
 
 # Receiving end of new user form
-post "/users/create" do
-    users_table.insert(:name => params["name"],
-                       :email => params["email"],
-                       :password => BCrypt::Password.create(params["password"]))
-    view "create_user"
+post "/users/create" do 
+    email_index=0
+    for user in users_table.all
+        email_check= users_table.where(:email => user[:email]).to_a[0]
+        if  email_check[:email] == params["email"]
+            email_index=1
+        end
+    end
+    
+    if email_index == 1
+        view "existing_user"
+    else
+        users_table.insert(:name => params["name"],
+                        :email => params["email"],
+                        :password => BCrypt::Password.create(params["password"]))
+        
+        view "create_user"
+    end
 end
 
 # Form to login
