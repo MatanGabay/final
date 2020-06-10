@@ -54,7 +54,6 @@ end
 
 # Send SMS
 post "/restaurants/:id/reviews/SMS" do
-    # @SMS = restaurant_table.where(:id => params["id"]).to_a[0]
     account_sid = ENV["account_sid"]
     auth_token = ENV["auth_token"]
     number = params["number"]
@@ -101,7 +100,7 @@ post "/users/create" do
             email_index=1
         end
     end
-    
+
     if email_index == 1
         view "existing_user"
     else
@@ -137,6 +136,21 @@ post "/logins/create" do
     else 
         view "create_login_failed"
     end
+end
+
+
+# New restaurant request
+post "/add_restaurant" do
+    account_sid = ENV["account_sid"]
+    auth_token = ENV["auth_token"]
+    name = params["restaurant_name"]
+    client = Twilio::REST::Client.new(account_sid, auth_token)
+    client.messages.create(
+    from: "+19495654787", 
+    to: "+18472198243",
+    body: "Please add #{name}"
+    )
+    view "add_restaurant"
 end
 
 # Logout

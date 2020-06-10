@@ -34,9 +34,6 @@
 <hr></hr>
 
 
-
-
-
 <div class="container">
   <div class="row md-4">
     <% for restaurant in @restaurants %>
@@ -53,4 +50,20 @@
 </div>
 </div>
 
+<br></br>
+
+<div class="container">
+<h2 align="center">Are we missing a MUST HAVE resturant in our list?</h2>
+    <form action="/add_restaurant" method="POST">
+    <div class="row mt-4">
+            <div class="col-md-10 text-center">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="restaurant_name" placeholder="Write its name below and we will add it ASAP">
+                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                <button align="center" type="submit" class="btn btn-primary">Text Us NOW!</button>
+            </div>
+    </form>
+</div>
 
